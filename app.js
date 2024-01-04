@@ -126,7 +126,7 @@ app.post('/submit-contact', function(req, res){
     Data.save()
     .then(()=>{
         console.log("Data saved successfully");
-        res.redirect('/');
+        res.redirect(process.env.FRONTEND_URL);
     })
     .catch(err=>{
         console.log(err);
@@ -188,7 +188,7 @@ app.post('/addblog', upload.single('image') ,function(req, res){
         .then(() =>{
             console.log("Blog saved");
             res.json("Blog saved")
-            // res.redirect('process.env.FRONTED_URL/allblogs/')
+            // res.redirect('process.env.FRONTEND_URL/allblogs/')
         })
         .catch(err =>console.error(err));
 
@@ -288,7 +288,7 @@ app.post('/api/connexion', function(req, res){
             httpOnly: true
         } )
 
-        res.redirect(process.env.FRONTED_URL );
+        res.redirect(process.env.FRONTEND_URL );
         // res.json('LOGGED IN');
 
         // res.render('UserPage', {data : user})
@@ -299,7 +299,7 @@ app.post('/api/connexion', function(req, res){
 
 app.get('/logout', (req, res) =>{
     res.clearCookie("access-token");
-    res.redirect(process.env.FRONTED_URL );
+    res.redirect(process.env.FRONTEND_URL );
 })
 
 app.get('/getJwt', validateToken, (req, res) =>{
