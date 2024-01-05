@@ -173,26 +173,26 @@ app.post('/addblog', upload.single('image') ,function(req, res){
         sousTitre : req.body.sousTitre,
         auteur : req.body.auteur,
         description : req.body.description,
-        imageName : req.file.filename,
-        datePublication : req.body.datePublication
+        // imageName : req.file.filename,
+        // datePublication : req.body.datePublication
     })
     // console.log(req.file);
 
     //Image obligatoire pour l'enregistrement d'un blog
-    if(!req.file){
-        res.status(400).json("No File Uploaded")
-    }
-    else{
+    // if(!req.file){
+    //     res.status(201).json("No File Uploaded")
+    // }
+    // else{
 
         Data.save()
         .then(() =>{
             console.log("Blog saved");
-            res.json("Blog saved")
+            res.status(201).json({"result":"Blog saved"})
             // res.redirect('process.env.FRONTEND_URL/allblogs/')
         })
         .catch(err =>console.error(err));
 
-    }
+    // }
 });
 
 //recuperation de les blogs
@@ -211,6 +211,9 @@ app.get('/blog/:id', function(req, res){
     .then((data)=>{
         // res.render('EditBlog',{data:data});
         res.json(data);
+    })
+    .catch((err)=>{
+        res.status(404).json({err: err});
     })
 });
 
@@ -309,3 +312,4 @@ app.get('/getJwt', validateToken, (req, res) =>{
 var server = app.listen(5000, function() {
     console.log("Server listening on port 5000");
 });
+module.exports = app

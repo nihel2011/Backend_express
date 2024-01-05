@@ -6,7 +6,7 @@ const blogSchema = mongoose.Schema({
     auteur : {type: 'String'},
     description: {type: 'String'},
     imageName : {type: 'String'},
-    datePublication : {type: 'Date'},
+    datePublication : {type: 'Date'}
 })
 
 module.exports = mongoose.model('Blog', blogSchema);
